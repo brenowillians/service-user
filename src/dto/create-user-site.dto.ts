@@ -9,17 +9,17 @@ export class CreateUserSiteDto implements UserSite {
     @Exclude()
     idUserSite: number;
      
-    @IsOptional()
+    @IsNotEmpty({message:"CAMPO LOGIN OBRIGATÓRIO"})
     login: string ;
 
-    @IsOptional()
+    @IsNotEmpty({message:"CAMPO PASSWORD OBRIGATÓRIO"})
     password: string ;
   
     @IsOptional()
     @IsBoolean()
     locked: boolean | null;
 
-    @IsOptional()
+    @IsNotEmpty({message:"CAMPO NAME OBRIGATÓRIO"})
     name: string ;
 
     @IsOptional()
