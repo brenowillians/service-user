@@ -1,0 +1,26 @@
+
+###
+POST  http://localhost:7000/address-type/ HTTP/1.1
+content-type: application/json
+
+{
+    "description":"trabalho"
+}
+
+###
+GET  http://localhost:7000/address-type/ HTTP/1.1
+
+###
+GET  http://localhost:7000/address-type/2 HTTP/1.1
+
+###
+PATCH  http://localhost:7000/address-type/2 HTTP/1.1
+content-type: application/json
+
+{
+    "password": "tyuvhjbu"
+    
+}
+
+###
+DELETE  http://localhost:7000/address-type/4 HTTP/1.1

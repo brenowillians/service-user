@@ -4,7 +4,7 @@ import { Group } from 'src/entities/group.entity';
 import { GroupStaff } from 'src/entities/group-staff.entity';
 import { GroupRule } from 'src/entities/group-rule.entity';
 
-export class CreateGroupDto implements Group {
+export class UpdateGroupDto implements Group {
 
      @Exclude()
     idGroup: number;

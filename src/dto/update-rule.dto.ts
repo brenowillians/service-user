@@ -3,7 +3,7 @@ import {Exclude} from 'class-transformer';
 import { Rule } from 'src/entities/rule.entity';
 import { GroupRule } from 'src/entities/group-rule.entity';
 
-export class CreateRuleDto implements Rule {
+export class UpdateRuleDto implements Rule {
 
     @Exclude()
     idRule: number;

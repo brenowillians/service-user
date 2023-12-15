@@ -9,15 +9,15 @@ import {
     ManyToOne,
     JoinColumn
   } from "typeorm";
-import { AdressType } from "./adress-type.entity";
+import { AddressType } from "./address-type.entity";
 import { UserSite } from "./user-site.entity";
 
-  @Index("PK_UserAdress", ["idAdress"], { unique: true })
+  @Index("PK_UserAddress", ["idAddress"], { unique: true })
 
-  @Entity("UserAdress")
-  export class UserAdress {
-    @PrimaryGeneratedColumn({ type: "int", name: "id_adress" })
-    idAdress: number;
+  @Entity("useraddress")
+  export class UserAddress {
+    @PrimaryGeneratedColumn({ type: "int", name: "id_address" })
+    idAddress: number;
 
     @Column("int", { name: "id_user" })
     idUser: number;
@@ -40,8 +40,8 @@ import { UserSite } from "./user-site.entity";
     @Column("varchar", { name: "country" })
     country: string ;
 
-    @Column("int", { name: "id_adress_type" })
-    idAdressType: number;
+    @Column("int", { name: "id_address_type" })
+    idAddressType: number;
 
     
     @CreateDateColumn({ type: 'timestamptz', precision: 3 })
@@ -54,11 +54,15 @@ import { UserSite } from "./user-site.entity";
     deletedDate: string;  
 
 
-    @ManyToOne(() => AdressType, (adressType) => adressType.userAdresses)
-    @JoinColumn([{ name: "id_adressType", referencedColumnName: "idAdressType" }])
-    idAdressType2: AdressType;
+    @ManyToOne(() => AddressType, (addressType) => addressType.userAddresses, {
+      onDelete: "CASCADE"
+    })
+    @JoinColumn([{ name: "id_addressType", referencedColumnName: "idAddressType" }])
+    idAddressType2: AddressType;
 
-    @ManyToOne(() => UserSite, (userSite) => userSite.userAdresses)
+    @ManyToOne(() => UserSite, (userSite) => userSite.userAddresses, {
+        onDelete: "CASCADE"
+    })
     @JoinColumn([{ name: "id_userSite", referencedColumnName: "idUserSite" }])
     idUserSite2: UserSite;
 

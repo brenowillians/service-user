@@ -8,15 +8,17 @@ import {
     UpdateDateColumn,
     OneToMany
   } from "typeorm";
-import { UserAdress } from "./user-adress.entity";
+import { UserAddress } from "./user-address.entity";
+import { CreateAddressTypeDto } from "src/dto/create-address-type.dto";
 
 
-  @Index("PK_AdressType", ["idAdressType"], { unique: true })
+  @Index("PK_AddressType", ["idAddressType"], { unique: true })
 
-  @Entity("AdressType")
-  export class AdressType {
-    @PrimaryGeneratedColumn({ type: "int", name: "id_adress_type" })
-    idAdressType: number;
+  @Entity("addresstype")
+  export class AddressType {
+
+    @PrimaryGeneratedColumn({ type: "int", name: "id_address_type" })
+    idAddressType: number;
      
     @Column("varchar", { name: "description"})
     description: string ;
@@ -32,11 +34,11 @@ import { UserAdress } from "./user-adress.entity";
     deletedDate: string;  
  
     @OneToMany(
-      () => UserAdress,
-      (userAdress) => userAdress.idAdressType2
+      () => UserAddress,
+      (userAddress) => userAddress.idAddressType2
     )
 
-    userAdresses: UserAdress[];
+    userAddresses: UserAddress[];
 
   }  
 

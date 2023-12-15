@@ -1,7 +1,7 @@
 import {IsBoolean, IsNotEmpty, IsNumber, IsOptional, MaxLength } from 'class-validator';
 import {Exclude} from 'class-transformer';
 import { UserSite } from 'src/entities/user-site.entity';
-import { UserAdress } from 'src/entities/user-adress.entity';
+import { UserAddress } from 'src/entities/user-address.entity';
 
 
 export class CreateUserSiteDto implements UserSite {
@@ -37,7 +37,7 @@ export class CreateUserSiteDto implements UserSite {
     @IsOptional()
     id_number: string | null;
 
-    @IsOptional()
+    @IsNotEmpty({message:"CAMPO CPF OBRIGATÓRIO"})
     cpf: string | null;
 
     
@@ -52,6 +52,6 @@ export class CreateUserSiteDto implements UserSite {
 
 
     @Exclude()
-      userAdresses: UserAdress[];
+      userAddresses: UserAddress[];
   
 }

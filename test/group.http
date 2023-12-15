@@ -1,0 +1,27 @@
+
+###
+POST  http://localhost:7000/group/ HTTP/1.1
+content-type: application/json
+
+{
+    "name": "financeiro"
+    
+}
+
+###
+GET  http://localhost:7000/group/ HTTP/1.1
+
+###
+GET  http://localhost:7000/group/2 HTTP/1.1
+
+###
+PATCH  http://localhost:7000/group/2 HTTP/1.1
+content-type: application/json
+
+{
+    "password": "tyuvhjbu"
+    
+}
+
+###
+DELETE  http://localhost:7000/group/4 HTTP/1.1

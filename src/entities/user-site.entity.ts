@@ -10,12 +10,12 @@ import {
     UpdateDateColumn,
     OneToMany
   } from "typeorm";
-import { UserAdress } from "./user-adress.entity";
+import { UserAddress } from "./user-address.entity";
 
 
   @Index("PK_UserSite", ["idUserSite"], { unique: true })
 
-  @Entity("UserSite")
+  @Entity("usersite")
   export class UserSite {
     @PrimaryGeneratedColumn({ type: "int", name: "id_userSite" })
     idUserSite: number;
@@ -48,7 +48,7 @@ import { UserAdress } from "./user-adress.entity";
     id_number: string | null;
 
     @Column("varchar", { name: "cpf" })
-    cpf: string | null;
+    cpf: string ;
 
     
     @CreateDateColumn({ type: 'timestamptz', precision: 3 })
@@ -62,11 +62,8 @@ import { UserAdress } from "./user-adress.entity";
 
 
     @OneToMany(
-      () => UserAdress,
-      (userAdress) => userAdress.idUserSite2
+      () => UserAddress,
+      (userAddress) => userAddress.idUserSite2
     )
-
-    userAdresses: UserAdress[];
-
-
+    userAddresses: UserAddress[];
   }  

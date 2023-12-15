@@ -13,7 +13,7 @@ import { GroupRule } from "./group-rule.entity";
 
   @Index("PK_Rule", ["idRule"], { unique: true })
 
-  @Entity("Rule")
+  @Entity("rule")
   export class Rule {
     @PrimaryGeneratedColumn({ type: "int", name: "id_rule" })
     idRule: number;

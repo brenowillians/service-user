@@ -1,0 +1,43 @@
+
+###
+POST  http://localhost:7000/staff/ HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Breno",
+    "login": " breno",
+    "password": "123456",
+    "active": true,
+    "sector": "Amoxarifado",
+    "role": "Ferreiro",
+    "id_number": "112233445",
+    "cpf": " 31254478934"
+}
+
+###
+GET  http://localhost:7000/staff/ HTTP/1.1
+
+###
+GET  http://localhost:7000/staff/2 HTTP/1.1
+
+###
+PATCH  http://localhost:7000/staff/7 HTTP/1.1
+content-type: application/json
+
+{
+    "password": "123456"
+    
+}
+
+###
+DELETE  http://localhost:7000/staff/4 HTTP/1.1
+
+
+###
+POST  http://localhost:7000/staff/signin HTTP/1.1
+content-type: application/json
+
+{
+    "login": " breno",
+    "password": "1234567"
+}

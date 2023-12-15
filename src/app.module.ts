@@ -3,29 +3,29 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Staff } from './entities/staff.entity';
-import { StaffController } from './staff.controller';
-import { StaffService } from './staff.service';
-import { AdressType } from './entities/adress-type.entity';
+import { StaffController } from './controllers/staff.controller';
+import { StaffService } from './services/staff.service';
+import { AddressType } from './entities/address-type.entity';
 import { GroupRule } from './entities/group-rule.entity';
 import { GroupStaff } from './entities/group-staff.entity';
 import { Group } from './entities/group.entity';
 import { Rule } from './entities/rule.entity';
-import { UserAdress } from './entities/user-adress.entity';
+import { UserAddress } from './entities/user-address.entity';
 import { UserSite } from './entities/user-site.entity';
-import { AdressTypeService } from './adress-type.service';
-import { AdressTypeController } from './adress-type.controller';
-import { GroupRuleService } from './group-rule.service';
-import { GroupRuleController } from './group-rule.controller';
-import { GroupStaffService } from './group-staff.service';
-import { GroupStaffController } from './group-staff.controller';
-import { GroupService } from './group.service';
-import { GroupController } from './group.controller';
-import { RuleService } from './rule.service';
-import { RuleController } from './rule.controller';
-import { UserAdressService } from './user-adress.service';
-import { UserAdressController } from './user-adress.controller';
-import { UserSiteService } from './user-site.service';
-import { UserSiteController } from './user-site.controller';
+import { AddressTypeService } from './services/address-type.service';
+import { AddressTypeController } from './controllers/address-type.controller';
+import { GroupRuleService } from './services/group-rule.service';
+import { GroupRuleController } from './controllers/group-rule.controller';
+import { GroupStaffService } from './services/group-staff.service';
+import { GroupStaffController } from './controllers/group-staff.controller';
+import { GroupService } from './services/group.service';
+import { GroupController } from './controllers/group.controller';
+import { RuleService } from './services/rule.service';
+import { RuleController } from './controllers/rule.controller';
+import { UserAddressService } from './services/user-address.service';
+import { UserAddressController } from './controllers/user-address.controller';
+import { UserSiteService } from './services/user-site.service';
+import { UserSiteController } from './controllers/user-site.controller';
 
 @Module({
   imports: [
@@ -42,10 +42,10 @@ import { UserSiteController } from './user-site.controller';
       synchronize: true, // never true in production!
     }),
 
-    TypeOrmModule.forFeature([Staff, AdressType, GroupRule, GroupStaff, Group, Rule, UserAdress, UserSite]),
+    TypeOrmModule.forFeature([Staff, AddressType, GroupRule, GroupStaff, Group, Rule, UserAddress, UserSite]),
 
   ],
-  controllers: [AppController, StaffController, AdressTypeController, GroupRuleController, GroupStaffController, GroupController, RuleController, UserAdressController, UserSiteController],
-  providers: [AppService, StaffService, AdressTypeService, GroupRuleService, GroupStaffService, GroupService, RuleService, UserAdressService, UserSiteService],
+  controllers: [AppController, StaffController, AddressTypeController, GroupRuleController, GroupStaffController, GroupController, RuleController, UserAddressController, UserSiteController],
+  providers: [AppService, StaffService, AddressTypeService, GroupRuleService, GroupStaffService, GroupService, RuleService, UserAddressService, UserSiteService],
 })
 export class AppModule {}

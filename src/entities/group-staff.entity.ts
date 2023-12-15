@@ -36,11 +36,15 @@ import { Group } from "./group.entity";
     @DeleteDateColumn({ type: 'timestamptz', precision: 3 })
     deletedDate: string;  
 
-    @ManyToOne(() => Staff, (staff) => staff.groupStaffs)
+    @ManyToOne(() => Staff, (staff) => staff.groupStaffs,{
+      onDelete: "CASCADE"
+   })
     @JoinColumn([{ name: "id_staff", referencedColumnName: "idStaff" }])
     idStaff2: Staff;
 
-    @ManyToOne(() => Group, (group) => group.groupStaffs)
+    @ManyToOne(() => Group, (group) => group.groupStaffs,{
+      onDelete: "CASCADE"
+    })
     @JoinColumn([{ name: "id_group", referencedColumnName: "idGroup" }])
     idGroup2: Group
 

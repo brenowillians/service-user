@@ -1,0 +1,32 @@
+###
+POST  http://localhost:7000/user-address/ HTTP/1.1
+content-type: application/json
+
+{
+    "idUser": 675,
+    "street": "estrada do dendê",
+    "number": 500,
+    "zipCode": 21920000,
+    "city": "Rio de Janeiro",
+    "state": "Rio de Janeiro",
+    "country": "Brasil",
+    "idAddressType": 23
+}
+
+###
+GET  http://localhost:7000/user-address/ HTTP/1.1
+
+###
+GET  http://localhost:7000/user-address/2 HTTP/1.1
+
+###
+PATCH  http://localhost:7000/user-address/2 HTTP/1.1
+content-type: application/json
+
+{
+    "password": "tyuvhjbu"
+    
+}
+
+###
+DELETE  http://localhost:7000/user-address/4 HTTP/1.1

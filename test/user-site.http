@@ -1,0 +1,40 @@
+
+###
+POST  http://localhost:7000/user-site/ HTTP/1.1
+content-type: application/json
+
+{
+    "login": " fabio",
+    "password": "123456",
+    "name": "fabio",
+    "cpf": 12345678910
+
+    
+}
+
+###
+GET  http://localhost:7000/user-site/ HTTP/1.1
+
+###
+GET  http://localhost:7000/user-site/2 HTTP/1.1
+
+###
+PATCH  http://localhost:7000/user-site/5 HTTP/1.1
+content-type: application/json
+
+{
+    "login": "fabio"
+    
+}
+
+###
+DELETE  http://localhost:7000/user-site/4 HTTP/1.1
+
+###
+POST  http://localhost:7000/user-site/signin HTTP/1.1
+content-type: application/json
+
+{
+    "login": "fabio",
+    "password": "123456"
+}

@@ -1,44 +1,39 @@
 import {IsBoolean, IsNotEmpty, IsNumber, IsOptional, MaxLength } from 'class-validator';
 import {Exclude} from 'class-transformer';
+import { AddressType } from 'src/entities/address-type.entity';
 import { UserSite } from 'src/entities/user-site.entity';
 import { UserAddress } from 'src/entities/user-address.entity';
 
 
-export class UpdateUserSiteDto implements UserSite {
-
+ 
+  export class UpdateUserAddressDto implements UserAddress {
+    
     @Exclude()
-    idUserSite: number;
-     
-    @IsOptional()
-    login: string ;
+    idAddress: number;
 
     @IsOptional()
-    password: string ;
-  
-    @IsOptional()
-    @IsBoolean()
-    locked: boolean | null;
+    idUser: number;
 
     @IsOptional()
-    name: string ;
+    street: string ;
+      
+    @IsOptional()
+    number: string ;
 
     @IsOptional()
-    birthday: string | null;
-  
-    @IsOptional()
-    gender: string | null;
+    zipCode: string ;
 
     @IsOptional()
-    phone: string | null;
+    city: string ;
 
     @IsOptional()
-    mobile: string | null;
+    state: string ;
 
     @IsOptional()
-    id_number: string | null;
+    country: string ;
 
     @IsOptional()
-    cpf: string | null;
+    idAddressType: number;
 
     
     @Exclude()
@@ -52,6 +47,13 @@ export class UpdateUserSiteDto implements UserSite {
 
 
     @Exclude()
-      userAddresses: UserAddress[];
-  
-}
+    idAddressType2: AddressType;
+
+    @Exclude()
+    idUserSite2: UserSite;
+
+
+    
+
+  }
+

@@ -5,7 +5,7 @@ import { Group } from 'src/entities/group.entity';
 import { Rule } from 'src/entities/rule.entity';
 
 
-export class CreateGroupRuleDto implements GroupRule {
+export class UpdateGroupRuleDto implements GroupRule {
 
     @Exclude()
     idGroupRule: number;

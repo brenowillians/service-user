@@ -15,7 +15,7 @@ import { Rule } from "./rule.entity";
 
   @Index("PK_GroupRule", ["idGroupRule"], { unique: true })
 
-  @Entity("groupRule")
+  @Entity("grouprule")
   export class GroupRule {
     @PrimaryGeneratedColumn({ type: "int", name: "id_grouprule" })
     idGroupRule: number;
@@ -40,12 +40,16 @@ import { Rule } from "./rule.entity";
 
 
     
-    @ManyToOne(() => Group, (group) => group.groupRules)
+    @ManyToOne(() => Group, (group) => group.groupRules,{
+      onDelete: "CASCADE"
+    })
     @JoinColumn([{ name: "id_group", referencedColumnName: "idGroup" }])
     idGroup2: Group;
 
     
-    @ManyToOne(() => Rule, (rule) => rule.groupRules)
+    @ManyToOne(() => Rule, (rule) => rule.groupRules,{
+      onDelete: "CASCADE"
+    })
     @JoinColumn([{ name: "id_rule", referencedColumnName: "idRule" }])
     idRule2: Rule;
 

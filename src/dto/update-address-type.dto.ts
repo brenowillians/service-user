@@ -1,14 +1,14 @@
 import {IsBoolean, IsNotEmpty, IsNumber, IsOptional, MaxLength } from 'class-validator';
 import {Exclude} from 'class-transformer';
-import { AdressType } from 'src/entities/adress-type.entity';
-import { UserAdress } from 'src/entities/user-adress.entity';
+import { AddressType } from 'src/entities/address-type.entity';
+import { UserAddress } from 'src/entities/user-address.entity';
 
-export class CreateAdressTypeDto implements AdressType {
+export class UpdateAddressTypeDto implements AddressType {
 
     @Exclude()
-    idAdressType: number;
+    idAddressType: number;
      
-    @IsNotEmpty({message:"CAMPO DESCRIPTION OBRIGATÓRIO"})
+    @IsOptional()
     description: string ;
     
     
@@ -23,6 +23,6 @@ export class CreateAdressTypeDto implements AdressType {
  
     @Exclude()
       
-    userAdresses: UserAdress[];
+    userAddresses: UserAddress[];
 
   }  

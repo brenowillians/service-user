@@ -1,0 +1,28 @@
+
+###
+POST  http://localhost:7000/group-rule/ HTTP/1.1
+content-type: application/json
+
+{
+    "idGroup":5,
+    "idRule":3
+
+}
+
+###
+GET  http://localhost:7000/group-rule/ HTTP/1.1
+
+###
+GET  http://localhost:7000/group-rule/2 HTTP/1.1
+
+###
+PATCH  http://localhost:7000/group-rule/2 HTTP/1.1
+content-type: application/json
+
+{
+    "password": "tyuvhjbu"
+    
+}
+
+###
+DELETE  http://localhost:7000/group-rule/4 HTTP/1.1
