@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Staff } from 'src/entities/staff.entity';
 import { CreateStaffDto } from 'src/dto/create-staff.dto';
@@ -6,11 +6,14 @@ import { UpdateStaffDto } from 'src/dto/update-staff.dto';
 import { Repository } from 'typeorm';
 import * as argon2 from 'argon2';
 import { SigninStaffDto } from 'src/dto/signin-staff.dto';
+import { JwtService } from '@nestjs/jwt';
+
 
 @Injectable()
 export class StaffService {
     constructor(
         @InjectRepository(Staff) private staffRepo: Repository<Staff>,
+        private jwtService: JwtService,
       ) {}
     
     async create(createStaffDto: CreateStaffDto) {
@@ -69,7 +72,13 @@ export class StaffService {
         if(user){
           if(user.active && !user.locked){
               if (await argon2.verify(user.password, signinStaffDto.password)) {
-                return true
+                
+                delete user.password
+
+                const tokens = await this.getTokens(user)
+
+                return { user, ...tokens}
+                
               } else {
                 throw "Invalid user or password"
               }
@@ -88,4 +97,66 @@ export class StaffService {
       }
 
     }
-}
+
+    private async getTokens(staff: Staff) {
+      const [accessToken, refreshToken] = await Promise.all([
+        this.jwtService.signAsync(
+          {
+            source: "staff",
+            idUser: staff.idStaff
+          },
+          {
+            secret: process.env.JWT_ACCESS_KEY,
+            expiresIn: '60m',
+          },
+        ),
+
+        this.jwtService.signAsync(
+          {
+            source: "staff",
+            idUser: staff.idStaff
+          },
+          {
+            secret: process.env.JWT_REFRESH_KEY,
+            expiresIn: "180m",
+          },
+        ),
+      ]);
+  
+      return {
+        accessToken,
+        refreshToken,
+      };
+    }
+  
+    async refreshTokens(idStaff: number){
+      
+      try{
+   
+        const staffResponse = await this.findOne(idStaff)
+        if(!staffResponse || staffResponse.locked){
+          throw new HttpException({data: null,}, HttpStatus.UNAUTHORIZED);    
+        }
+  
+        
+        const tokens = await this.getTokens(staffResponse);
+        
+        
+        return {
+            status: 200,
+            data: tokens,
+            message:'Tokens Refreshed',
+            error: null
+        }
+    }
+    catch(error){
+        
+        return {
+            status: 400,
+            data: null,
+            message:error.message,
+            error: error.stack
+        }            
+    }        
+    }
+  }

@@ -39,5 +39,5 @@ content-type: application/json
 
 {
     "login": " breno",
-    "password": "1234567"
+    "password": "123456"
 }

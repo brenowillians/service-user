@@ -26,9 +26,17 @@ import { UserAddressService } from './services/user-address.service';
 import { UserAddressController } from './controllers/user-address.controller';
 import { UserSiteService } from './services/user-site.service';
 import { UserSiteController } from './controllers/user-site.controller';
+import { ConfigModule } from '@nestjs/config';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { AccessTokenStrategy, RefreshTokenStrategy } from './services/auth-service/strategies';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      expandVariables: true,
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -43,9 +51,22 @@ import { UserSiteController } from './controllers/user-site.controller';
     }),
 
     TypeOrmModule.forFeature([Staff, AddressType, GroupRule, GroupStaff, Group, Rule, UserAddress, UserSite]),
-
+    PassportModule,
+    JwtModule,
   ],
   controllers: [AppController, StaffController, AddressTypeController, GroupRuleController, GroupStaffController, GroupController, RuleController, UserAddressController, UserSiteController],
-  providers: [AppService, StaffService, AddressTypeService, GroupRuleService, GroupStaffService, GroupService, RuleService, UserAddressService, UserSiteService],
+  providers: [
+    AppService, 
+    StaffService, 
+    AddressTypeService, 
+    GroupRuleService, 
+    GroupStaffService, 
+    GroupService, 
+    RuleService,
+    UserAddressService, 
+    UserSiteService, 
+    AccessTokenStrategy, 
+    RefreshTokenStrategy
+  ],
 })
 export class AppModule {}

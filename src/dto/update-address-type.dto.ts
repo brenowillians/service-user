@@ -21,8 +21,7 @@ export class UpdateAddressTypeDto implements AddressType {
     @Exclude()
     deletedDate: string;  
  
-    @Exclude()
-      
+    @Exclude()      
     userAddresses: UserAddress[];
 
   }  

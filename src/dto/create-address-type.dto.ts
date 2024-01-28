@@ -21,8 +21,7 @@ export class CreateAddressTypeDto implements AddressType {
     @Exclude()
     deletedDate: string;  
  
-    @Exclude()
-      
+    @Exclude()     
     userAddresses: UserAddress[];
 
   }  
