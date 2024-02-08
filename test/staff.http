@@ -1,6 +1,6 @@
 
 ###
-POST  http://localhost:7000/staff/ HTTP/1.1
+POST  http://localhost:7200/staff/ HTTP/1.1
 content-type: application/json
 
 {
@@ -15,29 +15,30 @@ content-type: application/json
 }
 
 ###
-GET  http://localhost:7000/staff/ HTTP/1.1
+GET  http://localhost:7200/staff/ HTTP/1.1
 
 ###
-GET  http://localhost:7000/staff/2 HTTP/1.1
+GET  http://localhost:7200/staff/2 HTTP/1.1
 
 ###
-PATCH  http://localhost:7000/staff/7 HTTP/1.1
+PATCH  http://localhost:7200/staff/8 HTTP/1.1
 content-type: application/json
 
 {
-    "password": "123456"
+    "login": "breno"
     
 }
 
 ###
-DELETE  http://localhost:7000/staff/4 HTTP/1.1
+DELETE  http://localhost:7200/staff/4 HTTP/1.1
 
 
 ###
-POST  http://localhost:7000/staff/signin HTTP/1.1
+POST  http://localhost:7200/staff/signin HTTP/1.1
 content-type: application/json
 
 {
-    "login": " breno",
+    "login": "breno",
     "password": "123456"
+
 }
