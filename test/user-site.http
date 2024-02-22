@@ -16,7 +16,7 @@ content-type: application/json
 GET  http://localhost:7200/user-site/ HTTP/1.1
 
 ###
-GET  http://localhost:7200/user-site/2 HTTP/1.1
+GET  http://localhost:7200/user-site/6 HTTP/1.1
 
 ###
 PATCH  http://localhost:7200/user-site/5 HTTP/1.1

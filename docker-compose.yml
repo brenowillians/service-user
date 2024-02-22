@@ -1,0 +1,14 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  backend-service-user:
+    #image: learn
+    image: ghcr.io/brenowillians/service-user-producao:latest
+    container_name: backend-service-user
+    restart: always
+    #volumes:
+    #  - /home/averbach/VolumesDocker/sqlite/:/home/averbach/API/microservice-pagamento-judicial/sqlite
+    ports:
+      - "7100:7100"
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    env_file: .env.producao

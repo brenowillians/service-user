@@ -20,6 +20,17 @@ export class StaffController {
     return "ESSA PORRA TÁ ALTERADA"
   }
   
+
+  @ApiCreatedResponse({
+    type: Staff, // aqui definimos o tipo de resposta
+  }) 
+
+  @Post('signin')
+  signin(@Body() signinStaffDto: SigninStaffDto) {
+    return this.staff.signin(signinStaffDto);
+  }
+
+
   @ApiCreatedResponse({
     type: Staff, // aqui definimos o tipo de resposta
   }) 
@@ -58,14 +69,6 @@ export class StaffController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.staff.remove(+id);
-  }
-
-  @ApiCreatedResponse({
-    type: Staff, // aqui definimos o tipo de resposta
-  }) 
-  @Post('signin')
-  signin(@Body() signinStaffDto: SigninStaffDto) {
-    return this.staff.signin(signinStaffDto);
   }
 
 }
