@@ -4,6 +4,7 @@ import { CreateGroupDto } from 'src/dto/create-group.dto';
 import { UpdateGroupDto } from 'src/dto/update-group.dto';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { Group } from 'src/entities/group.entity';
+import { ListCriteriaGroupDto } from 'src/dto/list-criteria-group.dto';
 
 
 @ApiTags('Group') // Titulo Da Cadeia de Metodos
@@ -59,6 +60,12 @@ export class GroupController {
     return this.group.remove(+id);
   }
 
-
+  @ApiCreatedResponse({
+    type: Group, // aqui definimos o tipo de resposta
+  }) 
+  @Post('list')
+  list(@Body() listCriteriaGroupDto: ListCriteriaGroupDto) {
+    return this.group.list(listCriteriaGroupDto);
+  }
 
 }

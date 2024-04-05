@@ -4,6 +4,7 @@ import { CreateRuleDto } from 'src/dto/create-rule.dto';
 import { UpdateRuleDto } from 'src/dto/update-rule.dto';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { Rule } from 'src/entities/rule.entity';
+import { ListCriteriaRuleDto } from 'src/dto/list-criteria-rule.dto';
 
 @ApiTags('Rule') // Titulo Da Cadeia de Metodos
 @Controller('rule')
@@ -59,6 +60,12 @@ export class RuleController {
     return this.rule.remove(+id);
   }
 
-
+  @ApiCreatedResponse({
+    type: Rule, // aqui definimos o tipo de resposta
+  }) 
+  @Post('list')
+  list(@Body() listCriteriaRuleDto: ListCriteriaRuleDto) {
+    return this.rule.list(listCriteriaRuleDto);
+  }
 
 }

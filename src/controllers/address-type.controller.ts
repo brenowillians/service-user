@@ -4,6 +4,7 @@ import { CreateAddressTypeDto } from 'src/dto/create-address-type.dto';
 import { UpdateAddressTypeDto } from 'src/dto/update-address-type.dto';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { AddressType } from 'src/entities/address-type.entity';
+import { ListCriteriaAddressTypeDto } from 'src/dto/list-criteria-address-type.dto';
 
 
 @ApiTags('AddressType') // Titulo Da Cadeia de Metodos
@@ -54,6 +55,14 @@ export class AddressTypeController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.addressType.remove(+id);
+  }
+
+  @ApiCreatedResponse({
+    type: AddressType, // aqui definimos o tipo de resposta
+  }) 
+  @Post('list')
+  list(@Body() listCriteriaAddressTypeDto: ListCriteriaAddressTypeDto) {
+    return this.addressType.list(listCriteriaAddressTypeDto);
   }
 
 }

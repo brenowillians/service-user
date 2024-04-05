@@ -4,6 +4,7 @@ import { CreateUserAddressDto } from 'src/dto/create-user-address.dto';
 import { UpdateUserAddressDto } from 'src/dto/update-user-address.dto';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { UserAddress } from 'src/entities/user-address.entity';
+import { ListCriteriaUserAddressDto } from 'src/dto/list-criteria-user-address.dto';
 
 
 @ApiTags('UserAddress') // Titulo Da Cadeia de Metodos
@@ -60,5 +61,12 @@ export class UserAddressController {
     return this.userAddress.remove(+id);
   }
 
+  @ApiCreatedResponse({
+    type: UserAddress, // aqui definimos o tipo de resposta
+  }) 
+  @Post('list')
+  list(@Body() listCriteriaUserAddressDto: ListCriteriaUserAddressDto) {
+    return this.userAddress.list(listCriteriaUserAddressDto);
+  }
 
 }

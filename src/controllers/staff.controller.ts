@@ -5,6 +5,7 @@ import { UpdateStaffDto } from 'src/dto/update-staff.dto';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { Staff } from 'src/entities/staff.entity';
 import { SigninStaffDto } from 'src/dto/signin-staff.dto';
+import { ListCriteriaStaffDto } from 'src/dto/list-criteria-staff.dto';
 
 
 @ApiTags('Staff') // Titulo Da Cadeia de Metodos
@@ -69,6 +70,13 @@ export class StaffController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.staff.remove(+id);
+  }
+  @ApiCreatedResponse({
+    type: Staff, // aqui definimos o tipo de resposta
+  }) 
+  @Post('list')
+  list(@Body() listCriteriaStaffDto: ListCriteriaStaffDto) {
+    return this.staff.list(listCriteriaStaffDto);
   }
 
 }

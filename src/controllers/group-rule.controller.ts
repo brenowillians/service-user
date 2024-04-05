@@ -4,6 +4,7 @@ import { CreateGroupRuleDto } from 'src/dto/create-group-rule.dto';
 import { UpdateGroupRuleDto } from 'src/dto/update-group-rule.dto';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { GroupRule } from 'src/entities/group-rule.entity';
+import { ListCriteriaGroupRuleDto } from 'src/dto/list-criteria-group-rule.dto';
 
 @ApiTags('GroupRule') // Titulo Da Cadeia de Metodos
 @Controller('group-rule')
@@ -56,4 +57,12 @@ export class GroupRuleController {
     return this.groupRule.remove(+id);
   }
 
+
+  @ApiCreatedResponse({
+    type: GroupRule, // aqui definimos o tipo de resposta
+  }) 
+  @Post('list')
+  list(@Body() listCriteriaGroupRuleDto: ListCriteriaGroupRuleDto) {
+    return this.groupRule.list(listCriteriaGroupRuleDto);
+  }  
 }

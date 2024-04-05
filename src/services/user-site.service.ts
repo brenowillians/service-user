@@ -1,12 +1,13 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserSite } from 'src/entities/user-site.entity';
 import { CreateUserSiteDto } from 'src/dto/create-user-site.dto';
 import { UpdateUserSiteDto } from 'src/dto/update-user-site.dto';
-import { Repository } from 'typeorm';
+import { Repository, ILike } from 'typeorm';
 import * as argon2 from 'argon2';
 import { SigninUserSiteDto } from 'src/dto/signin-user-site.dto';
 import { JwtService } from '@nestjs/jwt';
+import { ListCriteriaUserSiteDto } from 'src/dto/list-criteria-user-site.dto';
 
 
 
@@ -162,6 +163,75 @@ export class UserSiteService {
             error: error.stack
         }            
     }        
+    }
+
+    async list(data: ListCriteriaUserSiteDto) {
+
+      try{
+          let criteria  = {}
+
+            
+          if (data.name)
+            criteria["name"]= ILike('%' +data.name  + '%')
+
+          if (data.cpf)
+            criteria["cpf"]= ILike('%' +data.cpf  + '%')
+
+          if (data.gender)
+            criteria["gender"]= ILike('%' +data.gender  + '%')
+
+          if (data.login)
+            criteria["login"]= ILike('%' +data.login  + '%')
+  
+          if (data.mobile)
+            criteria["mobile"]= ILike('%' +data.mobile  + '%')
+
+          if (data.phone)
+            criteria["phone"]= ILike('%' +data.phone  + '%')
+
+          const take= data.items || 10
+          const page= data.page || 1;
+          const skip= (page-1) * take ;
+  
+          const [result, total] = await this.userSiteRepo.findAndCount(
+              {
+                  where: criteria,
+                  order: data.order,
+                  take: take,
+                  skip: skip
+              }
+          );
+  
+          if(!result || result.length===0){
+              throw new NotFoundException('nothing to show'); 
+          }
+  
+  
+          return {
+              status: 200,
+              data: {result: result, total: total},
+              message:'list in data.result and total in data.total',
+              error: null
+          }
+      }
+      catch(error){
+          if(error instanceof NotFoundException){            
+              return {
+                  status: 404,
+                  data: null,
+                  message:error.message,
+                  error: error.message
+              }
+          }
+  
+          return {
+              status: 400,
+              data: null,
+              message:error.message,
+              error: error.stack
+          }           
+      }    
+      
     }
 
 }
