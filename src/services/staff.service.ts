@@ -173,6 +173,15 @@ export class StaffService {
           if (data.name)
             criteria["name"]= ILike('%' +data.name  + '%')
 
+          if (data.active){
+            criteria["active"]= true
+          }
+          else{
+            if(data.active == false){
+              criteria["active"]= false
+            }
+          }          
+
           const take= data.items || 10
           const page= data.page || 1;
           const skip= (page-1) * take ;

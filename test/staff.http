@@ -42,3 +42,9 @@ content-type: application/json
     "password": "123456"
 
 }
+
+###
+POST  http://167.86.100.139:7200/staff/list HTTP/1.1
+content-type: application/json
+
+{"name":"","items":10,"page":1,"order":{"name":"ASC"}}

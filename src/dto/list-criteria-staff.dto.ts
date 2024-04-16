@@ -7,10 +7,12 @@ export class ListCriteriaStaffDto {
     @IsOptional()
     name: string;
 
-
     @IsOptional()
     login: string;
 
+    @IsOptional()
+    @IsBoolean()
+    active: boolean;
 
     @IsNotEmpty()
     @IsInt()
