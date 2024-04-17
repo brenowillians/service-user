@@ -68,7 +68,21 @@ export class StaffService {
       
       try{
 
-        const user = await this.staffRepo.findOne({where: {login: signinStaffDto.login}})
+        const user = await this.staffRepo.findOne(
+          {
+            where: {login: signinStaffDto.login},
+            relations: {
+              /*groupStaffs:{
+                idGroup2:{
+                  groupRules: {
+                    idRule2: true
+                  }
+                }
+              }*/
+              groupStaffs :true
+            }
+          }
+        )
 
         if(user){
           if(user.active && !user.locked){
