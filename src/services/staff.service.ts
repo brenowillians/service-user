@@ -72,14 +72,13 @@ export class StaffService {
           {
             where: {login: signinStaffDto.login},
             relations: {
-              /*groupStaffs:{
+              groupStaffs:{
                 idGroup2:{
                   groupRules: {
                     idRule2: true
                   }
                 }
-              }*/
-              groupStaffs :true
+              }
             }
           }
         )
