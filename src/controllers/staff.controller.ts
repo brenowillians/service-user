@@ -79,4 +79,13 @@ export class StaffController {
     return this.staff.list(listCriteriaStaffDto);
   }
 
+
+  @ApiCreatedResponse({
+    type: Staff, // aqui definimos o tipo de resposta
+  }) 
+  @Get('refresh/:id')
+  refresh(@Param('id') id: string) {
+    return this.staff.refreshTokens(+id);
+  }
+
 }
