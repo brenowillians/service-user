@@ -212,6 +212,9 @@ export class StaffService {
               throw new NotFoundException('nothing to show'); 
           }
   
+          for(const staff of result){
+            staff.password =""
+          }
   
           return {
               status: 200,
