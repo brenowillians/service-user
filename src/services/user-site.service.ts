@@ -75,7 +75,7 @@ export class UserSiteService {
           const user = await this.userSiteRepo.findOne(
             {
               where: {login: signinUserSiteDto.login},
-              relations: {userAddresses: true}
+              relations: {userAddresses: { idAddressType2: true}}
             })
   
           if(user){

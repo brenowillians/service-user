@@ -3,7 +3,7 @@ POST  http://localhost:7200/user-address/ HTTP/1.1
 content-type: application/json
 
 {
-    "idUser": 675,
+    "idUserSite": 5,
     "street": "estrada do dendê",
     "number": 500,
     "zipCode": 21920000,
@@ -20,13 +20,13 @@ GET  http://localhost:7200/user-address/ HTTP/1.1
 GET  http://localhost:7200/user-address/2 HTTP/1.1
 
 ###
-PATCH  http://localhost:7200/user-address/2 HTTP/1.1
+PATCH  http://localhost:7200/user-address/3 HTTP/1.1
 content-type: application/json
 
 {
-    "password": "tyuvhjbu"
+   "idAddressType": 1
     
 }
 
 ###
-DELETE  http://localhost:7200/user-address/4 HTTP/1.1
+DELETE  http://localhost:7200/user-address/1 HTTP/1.1

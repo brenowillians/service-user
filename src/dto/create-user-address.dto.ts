@@ -12,7 +12,7 @@ import { UserAddress } from 'src/entities/user-address.entity';
     idAddress: number;
 
     @IsNotEmpty({message:"CAMPO IDUSER OBRIGATÓRIO"})
-    idUser: number;
+    idUserSite: number;
 
     @IsNotEmpty({message:"CAMPO STREET OBRIGATÓRIO"})
     street: string ;

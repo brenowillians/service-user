@@ -12,7 +12,7 @@ import { UserAddress } from 'src/entities/user-address.entity';
     idAddress: number;
 
     @IsOptional()
-    idUser: number;
+    idUserSite: number;
 
     @IsOptional()
     street: string ;

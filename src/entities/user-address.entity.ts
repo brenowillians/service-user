@@ -19,8 +19,8 @@ import { UserSite } from "./user-site.entity";
     @PrimaryGeneratedColumn({ type: "int", name: "id_address" })
     idAddress: number;
 
-    @Column("int", { name: "id_user" })
-    idUser: number;
+    @Column("int", { name: "id_userSite" })
+    idUserSite: number;
 
     @Column("varchar", { name: "street" })
     street: string ;
@@ -57,7 +57,7 @@ import { UserSite } from "./user-site.entity";
     @ManyToOne(() => AddressType, (addressType) => addressType.userAddresses, {
       onDelete: "CASCADE"
     })
-    @JoinColumn([{ name: "id_addressType", referencedColumnName: "idAddressType" }])
+    @JoinColumn([{ name: "id_address_type", referencedColumnName: "idAddressType" }])
     idAddressType2: AddressType;
 
     @ManyToOne(() => UserSite, (userSite) => userSite.userAddresses, {

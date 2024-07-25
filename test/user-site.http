@@ -23,7 +23,7 @@ PATCH  http://localhost:7200/user-site/5 HTTP/1.1
 content-type: application/json
 
 {
-    "login": "fabio"
+    "login": "fabio.toscano@gmail.com"
     
 }
 
@@ -35,6 +35,6 @@ POST  http://localhost:7200/user-site/signin HTTP/1.1
 content-type: application/json
 
 {
-    "login": "fabio",
+    "login": "fabio.toscano@gmail.com",
     "password": "123456"
 }
