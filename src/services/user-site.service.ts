@@ -72,7 +72,11 @@ export class UserSiteService {
         
         try{
   
-          const user = await this.userSiteRepo.findOne({where: {login: signinUserSiteDto.login}})
+          const user = await this.userSiteRepo.findOne(
+            {
+              where: {login: signinUserSiteDto.login},
+              relations: {userAddresses: true}
+            })
   
           if(user){
             if(!user.locked){
