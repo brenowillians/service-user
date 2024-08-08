@@ -24,7 +24,7 @@ PATCH  http://localhost:7200/user-address/3 HTTP/1.1
 content-type: application/json
 
 {
-   "idAddressType": 1
+   "primary": 1
     
 }
 

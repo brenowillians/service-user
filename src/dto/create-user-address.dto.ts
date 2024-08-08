@@ -35,6 +35,8 @@ import { UserAddress } from 'src/entities/user-address.entity';
     @IsNotEmpty({message:"CAMPO IDADDRESSTYPE OBRIGATÓRIO"})
     idAddressType: number;
 
+    @IsOptional()
+    primary: number
     
     @Exclude()
     createdDate: string;

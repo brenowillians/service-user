@@ -35,6 +35,8 @@ import { UserAddress } from 'src/entities/user-address.entity';
     @IsOptional()
     idAddressType: number;
 
+    @IsOptional()
+    primary: number
     
     @Exclude()
     createdDate: string;

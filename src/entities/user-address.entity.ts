@@ -43,6 +43,8 @@ import { UserSite } from "./user-site.entity";
     @Column("int", { name: "id_address_type" })
     idAddressType: number;
 
+    @Column("int", { name: "primary", nullable: true })
+    primary: number;
     
     @CreateDateColumn({ type: 'timestamptz', precision: 3 })
     createdDate: string;
