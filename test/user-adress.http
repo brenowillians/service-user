@@ -4,13 +4,13 @@ content-type: application/json
 
 {
     "idUserSite": 5,
-    "street": "estrada do dendê",
+    "street": "caningas",
     "number": 500,
     "zipCode": 21920000,
     "city": "Rio de Janeiro",
     "state": "Rio de Janeiro",
     "country": "Brasil",
-    "idAddressType": 23
+    "idAddressType": 1
 }
 
 ###
@@ -20,10 +20,11 @@ GET  http://localhost:7200/user-address/ HTTP/1.1
 GET  http://localhost:7200/user-address/2 HTTP/1.1
 
 ###
-PATCH  http://localhost:7200/user-address/3 HTTP/1.1
+PATCH  http://localhost:7200/user-address/5 HTTP/1.1
 content-type: application/json
 
 {
+   "idUserSite": 5,
    "primary": 1
     
 }

@@ -29,8 +29,29 @@ export class UserAddressService {
         return this.userAddressRepo.findOne({where: {idAddress: id}})
       }
     
-      update(id: number, updateUserAddressDto: UpdateUserAddressDto) {
-        return this.userAddressRepo.update(id, updateUserAddressDto)
+      async update(id: number, updateUserAddressDto: UpdateUserAddressDto) {
+
+        if(updateUserAddressDto.primary==1){
+          const resultOtherAddress =  await this.userAddressRepo.find({
+            where: { 
+              idUserSite: updateUserAddressDto.idUserSite,
+              primary:1
+            }
+          })
+          if(resultOtherAddress && resultOtherAddress.length>0 ){
+            for(const updateOtherAddress  of resultOtherAddress){
+              updateOtherAddress.primary=0
+              const updatedId = updateOtherAddress.idAddress
+              delete updateOtherAddress.idAddress
+              delete updateOtherAddress.createdDate
+              delete updateOtherAddress.updatedDate
+              delete updateOtherAddress.deletedDate
+              await this.userAddressRepo.update(updatedId, updateOtherAddress)  // update other address to make primary=0
+            }
+          }
+  
+        }
+        return  await this.userAddressRepo.update(id, updateUserAddressDto)
       }
     
       remove(id: number) {
