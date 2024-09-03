@@ -16,6 +16,8 @@ export class UserAddressService {
     
       async create(createUserAddressDto: CreateUserAddressDto) {
         
+        await this.updateOtherUserAddress(createUserAddressDto)
+
         const userAddress: UserAddress = this.userAddressRepo.create(createUserAddressDto);
         return await this.userAddressRepo.save(userAddress); 
     
@@ -31,26 +33,8 @@ export class UserAddressService {
     
       async update(id: number, updateUserAddressDto: UpdateUserAddressDto) {
 
-        if(updateUserAddressDto.primary==1){
-          const resultOtherAddress =  await this.userAddressRepo.find({
-            where: { 
-              idUserSite: updateUserAddressDto.idUserSite,
-              primary:1
-            }
-          })
-          if(resultOtherAddress && resultOtherAddress.length>0 ){
-            for(const updateOtherAddress  of resultOtherAddress){
-              updateOtherAddress.primary=0
-              const updatedId = updateOtherAddress.idAddress
-              delete updateOtherAddress.idAddress
-              delete updateOtherAddress.createdDate
-              delete updateOtherAddress.updatedDate
-              delete updateOtherAddress.deletedDate
-              await this.userAddressRepo.update(updatedId, updateOtherAddress)  // update other address to make primary=0
-            }
-          }
-  
-        }
+        await this.updateOtherUserAddress(updateUserAddressDto)
+
         return  await this.userAddressRepo.update(id, updateUserAddressDto)
       }
     
@@ -59,7 +43,6 @@ export class UserAddressService {
       }
 
       async list(data: ListCriteriaUserAddressDto) {
-
         try{
             let criteria  = {}
 
@@ -111,5 +94,28 @@ export class UserAddressService {
             }           
         }    
         
-      }   
+      }
+      
+      async updateOtherUserAddress(userAddressDto: UpdateUserAddressDto) : Promise<void>{
+        if(userAddressDto.primary==1){
+          const resultOtherAddress =  await this.userAddressRepo.find({
+            where: { 
+              idUserSite: userAddressDto.idUserSite,
+              primary:1
+            }
+          })
+          if(resultOtherAddress && resultOtherAddress.length>0 ){
+            for(const updateOtherAddress  of resultOtherAddress){
+              updateOtherAddress.primary=0
+              const updatedId = updateOtherAddress.idAddress
+              delete updateOtherAddress.idAddress
+              delete updateOtherAddress.createdDate
+              delete updateOtherAddress.updatedDate
+              delete updateOtherAddress.deletedDate
+              await this.userAddressRepo.update(updatedId, updateOtherAddress)  // update other address to make primary=0
+            }
+          }
+  
+        }
+      }
 }
