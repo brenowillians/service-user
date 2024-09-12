@@ -8,6 +8,9 @@ import * as argon2 from 'argon2';
 import { SigninUserSiteDto } from 'src/dto/signin-user-site.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ListCriteriaUserSiteDto } from 'src/dto/list-criteria-user-site.dto';
+import { GetCodeUserDto } from 'src/dto/get-code-user.dto';
+import { MailService } from './mail.service';
+import { sendMailDTO } from 'src/dto/send-mail.dto';
 
 
 
@@ -17,6 +20,7 @@ export class UserSiteService {
     constructor(
         @InjectRepository(UserSite) private userSiteRepo: Repository<UserSite>,
         private jwtService: JwtService,
+        private mailService: MailService,
 
       ) {}
     
@@ -106,6 +110,47 @@ export class UserSiteService {
         }
   
       }
+
+      async getCode(getCodeUserDto: GetCodeUserDto){
+       
+        try{
+  
+          const user = await this.userSiteRepo.findOne(
+            {
+              where: {login: getCodeUserDto.login},
+            })
+  
+          if(user){
+            if(!user.locked){
+
+              const password= new Date().getTime().toString().substring(7)
+              const hash= await this.hashData(password)
+
+              const mailDto: sendMailDTO={
+                message: `Olá! <br>Este é o seu código de acesso: ${password}`,
+                subject: 'Código de Acesso ao Sistema da Nasa',
+                from: 'ecommerce@averbachcobrancas.com.br',
+                to: getCodeUserDto.login
+              }
+              await this.mailService.sendMail(mailDto)
+              
+              await this.userSiteRepo.update({login:getCodeUserDto.login}, {password: hash})
+              return true
+            }
+            else{
+              throw "Invalid user"  
+            }
+          }
+          else{
+            throw "Invalid user"
+          }
+      
+        }
+        catch(error){
+          throw error
+        }
+      }
+
 
     private async getTokens(userSite: UserSite) {
       const [accessToken, refreshToken] = await Promise.all([

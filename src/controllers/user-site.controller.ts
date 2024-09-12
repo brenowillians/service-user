@@ -6,6 +6,7 @@ import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { UserSite } from 'src/entities/user-site.entity';
 import { SigninUserSiteDto } from 'src/dto/signin-user-site.dto';
 import { ListCriteriaUserSiteDto } from 'src/dto/list-criteria-user-site.dto';
+import { GetCodeUserDto } from 'src/dto/get-code-user.dto';
 
 
 @ApiTags('UserSite') // Titulo Da Cadeia de Metodos
@@ -66,6 +67,14 @@ export class UserSiteController {
   @Post('signin')
   signin(@Body() signinUserSiteDto: SigninUserSiteDto) {
     return this.userSite.signin(signinUserSiteDto);
+  }
+
+  @ApiCreatedResponse({
+    type: UserSite, // aqui definimos o tipo de resposta
+  }) 
+  @Post('get-code')
+  getCode(@Body() getCodeUserDto: GetCodeUserDto) {
+    return this.userSite.getCode(getCodeUserDto);
   }
 
   @ApiCreatedResponse({

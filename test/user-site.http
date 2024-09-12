@@ -19,11 +19,11 @@ GET  http://localhost:7200/user-site/ HTTP/1.1
 GET  http://localhost:7200/user-site/6 HTTP/1.1
 
 ###
-PATCH  http://localhost:7200/user-site/5 HTTP/1.1
+PATCH  http://localhost:7200/user-site/6 HTTP/1.1
 content-type: application/json
 
 {
-    "login": "fabio.toscano@gmail.com"
+    "login": "bwillians.fla@gmail.com"
     
 }
 
@@ -35,6 +35,15 @@ POST  http://localhost:7200/user-site/signin HTTP/1.1
 content-type: application/json
 
 {
-    "login": "fabio.toscano@gmail.com",
-    "password": "123456"
+    "login": "bwillians.fla@gmail.com",
+    "password": "324307"
+}
+
+
+###
+POST  http://localhost:7200/user-site/get-code HTTP/1.1
+content-type: application/json
+
+{
+    "login": "bwillians.fla@gmail.com"
 }

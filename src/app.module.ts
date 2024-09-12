@@ -30,6 +30,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { AccessTokenStrategy, RefreshTokenStrategy } from './services/auth-service/strategies';
+import { MailService } from './services/mail.service';
 
 @Module({
   imports: [
@@ -66,7 +67,8 @@ import { AccessTokenStrategy, RefreshTokenStrategy } from './services/auth-servi
     UserAddressService, 
     UserSiteService, 
     AccessTokenStrategy, 
-    RefreshTokenStrategy
+    RefreshTokenStrategy,
+    MailService
   ],
 })
 export class AppModule {}
